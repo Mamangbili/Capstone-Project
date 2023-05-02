@@ -1,10 +1,29 @@
 <?php
 class CardModel{
-    protected  $gambar;
-    protected  $nama_toko;
-    protected  $kota;
-    protected  $jenis_produk;
-    protected  $deskripsi;
+    
+    private PDO $conn;
+
+    public function __construct(MyDB $database)
+    {
+        $this->conn = $database->getConnection();
+    }
+
+    public function getCard(string $limit)
+    {
+        $sql = "SELECT * 
+                FROM usaha";
+
+        $stmt = $this->conn->query($sql);
+        $data = [];
+
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            $data[] = $row ;
+        }
+
+        return $data;
+
+    }
 
 
 }
