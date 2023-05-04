@@ -1,13 +1,12 @@
+import React from "react"
+
 const Dashboard = () => {
-  return(
-    <div>
+    return (<div>
         <nav>
-            ul
+            fwjaelkfjlaskdjfiodasjfodaishfaosdfho
         </nav>
-    </div>
-  )
+    </div>)
 }
 
 
-
-export default Dahsboard
+export default Dashboard
