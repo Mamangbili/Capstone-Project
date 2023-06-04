@@ -22,32 +22,33 @@ const Nav_daftar_masuk = () => {
 
     return (
         <div className="items-center justify-center flex my-5">
-            <div className="border-4 border-biru w-auto px-5 rounded-md">
-                <button className={
-                        `w-28 py-4 my-4 bg-biru rounded-l-sm px- text-1xl font-bold text-center transition ${
-                            StateForm === "masuk" ? "bg-biru" : "bg-slate-500"
-                        }`
-                    }
-                    onClick={
-                        () => {
-                            handlerState("masuk");
+            <div className="border-4 border-biru w-auto px-5 rounded-md flex flex-col justify-center">
+                <div className="flex justify-center">
+                    <button className={
+                            `w-28 py-4 my-4 bg-biru rounded-l-sm px- text-1xl font-bold text-center transition ${
+                                StateForm === "masuk" ? "bg-biru" : "bg-slate-500"
+                            }`
                         }
-                }>
-                    Masuk
-                </button>
-
-                <button className={
-                        `w-28 py-4 my-4 bg-biru rounded-r-sm px- text-1xl font-bold text-center transition ${
-                            StateForm === "daftar" ? "bg-biru" : "bg-slate-500"
-                        }`
-                    }
-                    onClick={
-                        () => {
-                            handlerState("daftar");
+                        onClick={
+                            () => {
+                                handlerState("masuk");
+                            }
+                    }>
+                        Masuk
+                    </button>
+                    <button className={
+                            `w-28 py-4 my-4 bg-biru rounded-r-sm px- text-1xl font-bold text-center transition ${
+                                StateForm === "daftar" ? "bg-biru" : "bg-slate-500"
+                            }`
                         }
-                }>
-                    Daftar
-                </button>
+                        onClick={
+                            () => {
+                                handlerState("daftar");
+                            }
+                    }>
+                        Daftar
+                    </button>
+                </div>
 
                 {RenderedComponent} </div>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 const Tentang_kami_content = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full transition-all duration-500 ease-in-out">
-      <h1 className="text-2xl font-bold">COLABORA</h1>
+      <h1 className="text-2xl font-bold">ROPE</h1>
 
       <section className="w-[267px] text-[15px] pr-16">
         <p>

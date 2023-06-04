@@ -1,48 +1,44 @@
-// import React from 'react';
+import React from 'react';
+import { Card_dashboard } from './card_dasboard';
+import { Link, Route, Routes } from 'react-router-dom';
+import Beranda from './Beranda';
+import App from '../App';
 
-export default function Navbar_dashboard() {
-    return (<>
-        <nav>
-            <ul className="flex justify-between p-5 text-3xl font-bold w-full border-b-3">
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Profil
+export default function Navbar_dashboard({ usaha_id }) {
+    const toko = `/dashboard/${usaha_id}/toko/${usaha_id}`
+
+    return (
+        <>
+            <nav>
+                <ul className="flex justify-between p-5 text-3xl font-bold w-full border-b-3">
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to="profil">Profil</Link>
                     </li>
-                </a>
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Beranda
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to="beranda">Beranda
+                        </Link>
                     </li>
-                </a>
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Toko
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to={toko} >Toko</Link>
                     </li>
-                </a>
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Mitra
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to="mitra">Mitra</Link>
                     </li>
-                </a>
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Iklan
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to="iklan">Iklan</Link>
                     </li>
-                </a>
-                <a href="">
-                    <li className="block py-1 px-5 rounded-full bg-blue-400">
-                        Invoice
+                    <li className="block h-10 rounded-full bg-blue-400">
+                        <Link to="invoices">Invoice</Link>
                     </li>
-                </a>
-                <a href="">
                     <li>
                         <div>
-
-                            wakwawa
+                            <input type='text' placeholder='Cari' className='w-44' />
                         </div>
                     </li>
-                </a>
-            </ul>
-        </nav>
-    </>)
+                </ul>
+            </nav>
+
+
+        </>
+    )
 };

@@ -1,7 +1,7 @@
 
 import React from 'react'; 
 
-export function ButtonWa(){
+export default function ButtonWa(){
   return(
      <>
         <a href="">
