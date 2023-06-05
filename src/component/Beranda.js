@@ -26,7 +26,9 @@ export default function Beranda() {
                     limit: 6
                 }
             }
-        ).then(response => setData(response.data))
+        ).then(response => 
+            {console.log(response.data)
+            setData(response.data)})
 
     }
 
@@ -37,14 +39,14 @@ export default function Beranda() {
     function click() {
         console.table(Data)
     }
-
+    if (!Data) return null
     // const toko = 'toko'+'/'
     return (
         <>
-            <div className="min-h-full w-full  flex items-center justify-center">
+            <div className="min-h-full w-full  flex items-center justify-center p-2">
 
                 {/* <img src={myimage} alt="" /> */}
-                <div className="overflow-auto flex flex-wrap justify-around w-[60vw] ">
+                <div className="overflow-auto flex flex-wrap justify-around w-[80vw]  gap-4 p-2">
                     {Data?.map((each) => (
                         <Link to={`/dashboard/${usaha_id}/toko/${each.usaha_id}`}>
                             <Card_dashboard

@@ -57,11 +57,11 @@ class ProfilTokoModel
     }
 
 
-    public function buatUsaha($nama_usaha, $alamat, $kota, $provinsi, $jenis_usaha, $deskripsi_usaha, $url_gambar_toko, $user_id, $produk_id)
+    public function buatUsaha($nama_usaha, $alamat, $kota, $provinsi, $jenis_usaha, $deskripsi_usaha, $url_gambar_toko, $user_id)
     {
-        $query = "INSERT INTO `usaha`( `nama_usaha`, `alamat`, `kota`, `provinsi`, `jenis_usaha`, `deskripsi_usaha`, `url_gambar_toko`, `user_id`, `produk_id`) 
+        $query = "INSERT INTO `usaha`( `nama_usaha`, `alamat`, `kota`, `provinsi`, `jenis_usaha`, `deskripsi_usaha`, `url_gambar_toko`, `user_id`) 
         VALUES 
-        ('{$nama_usaha}','{$alamat}','{$kota}','{$provinsi}','{$jenis_usaha}','{$deskripsi_usaha}','{$url_gambar_toko}','{$user_id}','{$produk_id}')";
+        ('{$nama_usaha}','{$alamat}','{$kota}','{$provinsi}','{$jenis_usaha}','{$deskripsi_usaha}','{$url_gambar_toko}','{$user_id}')";
 
         $myDB = new MyDB();
         $myDB->getConnection();

@@ -29,7 +29,7 @@ class CardTokoModel
 
             from usaha
             inner join users on usaha.user_id = users.user_id
-            inner join produk on usaha.produk_id = produk.produk_id
+            inner join produk on usaha.usaha_id = produk.usaha_id
 
             where usaha.usaha_id <> {$usaha_id}
             ORDER BY field(usaha.kota, '{$kota}') DESC, field(usaha.provinsi, '{$provinsi}') DESC
@@ -49,7 +49,7 @@ class CardTokoModel
 
             from usaha
             inner join users on usaha.user_id = users.user_id
-            inner join produk on usaha.produk_id = produk.produk_id
+            inner join produk on usaha.usaha_id = produk.usaha_id
 
             ORDER BY field(usaha.kota, '{$kota}') DESC, field(usaha.provinsi, '{$provinsi}') DESC
             LIMIT {$limit}";
@@ -95,7 +95,7 @@ class CardTokoModel
             
             from usaha
             inner join users on usaha.user_id = users.user_id
-            inner join produk on usaha.produk_id = produk.produk_id
+            inner join produk on usaha.usaha_id = produk.usaha_id
             
             order by RAND()
             limit {$remainder}
@@ -121,6 +121,52 @@ class CardTokoModel
         }
 
         return $datas;
+    }
+
+
+    public function fetchRandom($limit){
+        $myDB = new MyDB();
+        $myDB->getConnection();
+
+            $query = "SELECT 
+            usaha.url_gambar_toko,
+            users.url_gambar_profil,
+            usaha.kota,
+            usaha.nama_usaha, 
+            usaha.jenis_usaha,
+            usaha.deskripsi_usaha,
+            
+            usaha.usaha_id,
+            produk.produk_id,
+            users.user_id
+
+            from usaha
+            inner join users on usaha.user_id = users.user_id
+            inner join produk on usaha.usaha_id = produk.usaha_id
+
+            ORDER BY rand()
+            LIMIT {$limit}";
+
+            $result = mysqli_query($myDB->conn, $query);
+
+            $datas = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $object_of_card = [
+                    'url_gambar_toko' => $row['url_gambar_toko'],
+                    'url_gambar_profil' => $row['url_gambar_profil'],
+                    'kota' => $row['kota'],
+                    'nama_usaha' => $row['nama_usaha'],
+                    'jenis_usaha' => $row['jenis_usaha'],
+                    'deskripsi_toko' => $row['deskripsi_usaha'],
+                    'usaha_id' => $row['usaha_id'],
+                    'produk_id' => $row['produk_id'],
+                    'user_id' => $row['user_id']
+                ];
+
+                array_push($datas, $object_of_card);
+            }
+
+            return $datas;
     }
 }
 

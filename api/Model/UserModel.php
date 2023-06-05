@@ -78,7 +78,7 @@ class UserModel
     public function changeEmail($user_id, $email): bool
     {
         $query = "update users
-        set column email='{$email}'
+        set email='{$email}'
         where user_id = {$user_id}";
 
         $myDB = new MyDB();
@@ -92,7 +92,7 @@ class UserModel
     public function changeHP($user_id, $HP_baru)
     {
         $query = "update users
-        set column no_hp='{$HP_baru}'
+        set no_hp='{$HP_baru}'
         where user_id = {$user_id}";
 
         $myDB = new MyDB();
@@ -120,7 +120,7 @@ class UserModel
     public function changeNama($user_id,$nama_baru){
         $query = "update users
         set nama='{$nama_baru}'
-        where user_id '{$user_id}'
+        where user_id = '{$user_id}'
         ";
 
         $myDB = new MyDB();

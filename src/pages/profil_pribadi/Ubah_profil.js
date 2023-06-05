@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import myimage from '../../images/34-2023-06-03 061927-Screenshot (742).png'
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -22,6 +21,7 @@ export function Ubah_profil() {
             })
     }, [])
 
+    const [img,setImg] = useState({})
     const handleChange = (event) => {
         if (event.target.name === "gambar") {
             
@@ -30,11 +30,11 @@ export function Ubah_profil() {
             const formattedDateTime = currentDateTime.toISOString().slice(0, 19).replace('T', ' ');
             const url_name = Data.user_id + '-' + formattedDateTime + '-' + event.target.files[0].name
             var urlWithoutSpaces = url_name.replace(/[\/:]/g, '');
-            setData((prevState) => ({
+            setImg((prevState) => ({
                 ...prevState,
                 'url_gambar_profil': urlWithoutSpaces
             }));
-            setData((prevState) => ({
+            setImg((prevState) => ({
                 ...prevState,
                 'file_gambar_profil': event.target.files[0]
             }));
@@ -45,7 +45,7 @@ export function Ubah_profil() {
     }
 
     if (!Data) return null
-    let img_url = require('../../images/' + Data?.url_gambar_profil)
+    let img_url = require('../../images/src/' + Data?.url_gambar_profil)
 
     // function ubahGambar (){
 
@@ -57,8 +57,8 @@ export function Ubah_profil() {
         inputForm.append('user_id', Data.user_id,)
         inputForm.append('email', Data.email,)
         inputForm.append('no_hp', Data.no_hp)
-        inputForm.append('url_gambar_profil', Data.url_gambar_profil)
-        inputForm.append('file_gambar_profil', Data.file_gambar_profil)
+        inputForm.append('url_gambar_profil', img.url_gambar_profil)
+        inputForm.append('file_gambar_profil', img.file_gambar_profil)
 
         axios.post('http://localhost/proyekppl/api/ubahProfil.php', inputForm, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => console.log(response.data))

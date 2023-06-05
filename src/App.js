@@ -4,6 +4,7 @@ import Nav_daftar_masuk from "./component/nav_daftar_masuk";
 import React, {useState} from "react";
 import Card_hompage from "./component/card_homapage";
 import Dahsboard from "./pages/dashboard";
+import { Link } from "react-router-dom";
 
 
 function App() {
@@ -50,9 +51,11 @@ function App() {
                             </h1>
                         </div>
                     </div>
-                    <div className="guest-button text-2xl mt-5 inline-block border-2 border-black p-2 hover:bg-white transition rounded-full hover:text-biru shadow-xl">
-                        Masuk Sebagai Tamu ----------&gt;
-                    </div>
+                    <Link to='dashboard-tamu/beranda'>
+                        <div className="guest-button text-2xl mt-5 inline-block border-2 border-black p-2 hover:bg-white transition rounded-full hover:text-biru shadow-xl">
+                            Masuk Sebagai Tamu ----------&gt;
+                        </div>
+                    </Link>
                 </div>
                 <div className="right-panel flex-1 h-auto">
                     <nav>

@@ -2,6 +2,7 @@
 import myimage from '../../../images/src/channel.png'
 export function Header_toko({url_gambar_toko, nama_usaha, jenis_usaha }){
 
+    url_gambar_toko = require('../../../images/src/'+url_gambar_toko)
 
     return(
         <>

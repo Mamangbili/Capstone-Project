@@ -15,12 +15,13 @@ $email = $_POST['email'];
 $no_hp = $_POST['no_hp'];
 $user_id = $_POST['user_id'];
 $url_gambar_profil = $_POST['url_gambar_profil'];
+$file_gambar_profil = $_FILES['file_gambar_profil'];
 
 
-echo $nama.$email.$no_hp.$user_id.$url_gambar_profil;
-// $currentDir = getcwd();
-// $parentDir = dirname($currentDir);
-// $destinationPath = $parentDir . '\\src\\images\\src\\';
+$currentDir = getcwd();
+$parentDir = dirname($currentDir);
+$destinationPath = $parentDir.'\\src\\images\\src\\';
+$result = UserController::ubahProfil($user_id,$nama,$email,$no_hp,$url_gambar_profil);
+move_uploaded_file($file_gambar_profil['tmp_name'], $destinationPath.$url_gambar_profil);
 
-// $result = UserController::ubahProfil($user_id,$nama,$email,$no_hp,$url_gambar_profil);
-// move_uploaded_file($file_gambar_produk['tmp_name'], $destinationPath.$url_gambar_produk);
+echo true;

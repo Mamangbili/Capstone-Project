@@ -31,7 +31,7 @@ export function Profil_pribadi(){
             <div className=" flex justify-center gap-x-20 mt-20">
                 <Card_profil_pribadi email={Data?.email} nama={Data?.nama} no_hp={Data?.no_hp} url_gambar_profil={Data?.url_gambar_profil} usaha_id={usaha_id}/>
                 
-                <div className="flex justify-center flex-col border mb-24">
+                <div className="flex justify-center flex-col mb-72">
                     <div className="flex justify-center mb-2">
                         <h1 className="text-center bg-sky-300 w-44 p-1 rounded-md">My Card</h1>
                     </div>

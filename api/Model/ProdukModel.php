@@ -7,11 +7,11 @@ class ProdukModel{
         
     }
 
-    public function buatProduk($nama_produk, $harga, $url_gambar_produk, $deskripsi_produk){
+    public function buatProduk($nama_produk, $harga, $url_gambar_produk, $deskripsi_produk,$usaha_id){
         $query = "
         INSERT INTO `produk`
-        ( `nama_produk`, `harga`, `url_gambar_produk`, `deskripsi_produk`) 
-        VALUES ('{$nama_produk}', '{$harga}', '{$url_gambar_produk}',  '{$deskripsi_produk}') 
+        ( `nama_produk`, `harga`, `url_gambar_produk`, `deskripsi_produk`,`usaha_id`) 
+        VALUES ('{$nama_produk}', '{$harga}', '{$url_gambar_produk}',  '{$deskripsi_produk}',{$usaha_id}) 
         ";
 
         $myDB = new MyDB();
@@ -24,6 +24,32 @@ class ProdukModel{
         $lastInsertedId = $row['last_id'];
         return $lastInsertedId;
     }
+
+
+    public function fetchProdukUsaha($usaha_id){
+        $query = "select * from produk where usaha_id = {$usaha_id}";
+        $myDB = new MyDB();
+        $myDB->getConnection();
+
+        $result = $myDB->execute($query);
+        
+        $datas = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $data = [
+                'produk_id' => $row['produk_id'],
+                'nama_produk' => $row['nama_produk'],
+                'harga' => $row['harga'],
+                'url_gambar_produk' => $row['url_gambar_produk'],
+                'deskripsi_produk' => $row['deskripsi_produk'],
+                'usaha_id' => $row['usaha_id'],
+            ];
+
+            array_push($datas, $data);
+        }
+
+        return $datas;
+    }
 }
+
 
 

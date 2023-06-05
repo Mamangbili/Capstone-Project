@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 export function Card_profil_pribadi({nama,email,no_hp,url_gambar_profil,usaha_id}) {
     const logo_pencil = 'https://cdn-icons-png.flaticon.com/512/266/266146.png'
     const logo_kontak = 'https://www.freepnglogos.com/uploads/logo-telepon-png/phone-telephone-communication-vector-graphic-10.png'
-    url_gambar_profil = require('../../images/'+url_gambar_profil)
+    url_gambar_profil = require('../../images/src/'+url_gambar_profil)
 
     const navigate = useNavigate()
     function logout(){
@@ -50,7 +50,7 @@ export function Card_profil_pribadi({nama,email,no_hp,url_gambar_profil,usaha_id
                 </div>
 
                 <div className="flex justify-center">
-                    <button className="border border-slate-600 w-44" onClick={logout}>keluar</button>
+                    <button className="border border-slate-600 w-44 rounded-md bg-red-300" onClick={logout}>keluar</button>
                 </div>
 
             </div>

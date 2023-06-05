@@ -26,11 +26,17 @@ import Beranda from "./component/Beranda";
 import Dashboard from "./pages/dashboard";
 import { Profil_pribadi } from "./pages/profil_pribadi/Profil_pribadi";
 import { Card_profil_pribadi } from "./pages/profil_pribadi/Card_profil_pribadi";
+import { Testing } from "./testing";
+import Navbar_dashboard_tamu from "./component/Navbar_dashboard_tamu";
+import Dashboard_tamu from "./pages/Dashboard_tamu";
+import Beranda_tamu from "./component/Beranda_tamu";
+import { Buat_invoices } from "./pages/invoices/Buat_invoices";
+import { Tambah_produk_modal } from "./pages/invoices/invoices_components/Tambah_produk_modal";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render (<React.StrictMode>
     <BrowserRouter>
-        <Utama />
+        <Utama/>
     </BrowserRouter>
 </React.StrictMode>);

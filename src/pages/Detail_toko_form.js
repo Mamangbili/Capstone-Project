@@ -73,6 +73,7 @@ const Detail_toko_form = () => {
     }
         )
         .then((response) => {
+                console.log(response.data)
                 to_Dashboard(response.data.usaha_id)
             })
         

@@ -11,6 +11,12 @@ include_once __DIR__.'\Model\KolaboratorModel.php';
 include_once __DIR__.'\Model\PermintaanKolabModel.php';
 
 class GuestController {
+
+    public static function  guestFetch($limit){
+        $CardTokoModels = new CardTokoModel();
+        $result = $CardTokoModels->fetchRandom($limit);
+        return $result;
+    }
     
     public static function requestKolabList($usaha_id){
         $kolabModel =new KolaboratorModel();
@@ -54,17 +60,6 @@ class GuestController {
     }
 
     public static function buatDetailRegister($datas){
-        $produkModel = new ProdukModel();
-        $result_produk_id = $produkModel->buatProduk(
-            $datas['nama_produk'],
-            $datas['harga'] ,
-            $datas['url_gambar_produk'],
-            $datas['deskripsi_produk']
-        );
-    
-        $userModel = new UserModel();
-        $userModel->changeGambarProfil($datas['user_id'],$datas['url_gambar_profil']);
-    
         $usahaModel = new ProfilTokoModel();
         $result_usaha_user_id= $usahaModel->buatUsaha(
             $datas['nama_usaha'],
@@ -74,9 +69,21 @@ class GuestController {
             $datas['jenis_usaha'],
             $datas['deskripsi_usaha'],
             $datas['url_gambar_toko'],
-            $datas['user_id'],
-            $result_produk_id,
+            $datas['user_id']
         );
+
+        $produkModel = new ProdukModel();
+        $result_produk_id = $produkModel->buatProduk(
+            $datas['nama_produk'],
+            $datas['harga'] ,
+            $datas['url_gambar_produk'],
+            $datas['deskripsi_produk'],
+            $result_usaha_user_id['usaha_id']
+        );
+    
+        $userModel = new UserModel();
+        $userModel->changeGambarProfil($datas['user_id'],$datas['url_gambar_profil']);
+    
     
         return $result_usaha_user_id;
     }
@@ -133,6 +140,13 @@ class UserController extends GuestController {
 
         return true;
 
+    }
+
+    public static function fetchProdukSaya($usaha_id){
+        $model = new ProdukModel();
+        $result = $model->fetchProdukUsaha($usaha_id);
+
+        return $result;
     }
 }
 

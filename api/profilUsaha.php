@@ -9,7 +9,6 @@ include_once "Controller.php";
 $method = $_SERVER['REQUEST_METHOD'];
 
 $data = $_GET['usaha_id'];
-
 if ($method == 'GET'){
     $result = GuestController::reqeustProfilTokoModel($data);
 

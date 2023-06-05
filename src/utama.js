@@ -10,8 +10,9 @@ import { Invoices } from "./pages/invoices/Invoices";
 import { Profil_toko } from "./pages/profil_toko/Profil_toko";
 import { Ubah_profil } from "./pages/profil_pribadi/Ubah_profil";
 import { Profil_pribadi } from "./pages/profil_pribadi/Profil_pribadi";
-
-// const router =createBrowserRouter (createRoutesFromElements(
+import Dashboard_tamu from "./pages/Dashboard_tamu";
+import Beranda_tamu from "./component/Beranda_tamu";
+import { Profil_toko_tamu } from "./pages/profil_toko/Profil_toko_tamu";
 
 
 // ))
@@ -30,6 +31,12 @@ export default function Utama() {
                     <Route path="toko/:usaha_id_2" element={<Profil_toko />} />
                     <Route path="profil" element={<Profil_pribadi />} />
                     <Route path="edit" element={<Ubah_profil />} />
+                </Route>
+
+                <Route path="/dashboard-tamu" element={<Dashboard_tamu />} >
+                    <Route path='beranda' element= {<Beranda_tamu />} />
+                    <Route path='toko/:usaha_id' element= {<Profil_toko_tamu />} />
+
                 </Route>
             </Routes>
 
