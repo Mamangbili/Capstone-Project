@@ -11,7 +11,7 @@ $usaha_id_1 = $_POST['usaha_id_1'];
 $usaha_id_2 = $_POST['usaha_id_2'];
 $deskripsi = $_POST['deskripsi_permintaan'];
 if ($method == 'POST'){
-    $result = UserController::getKolabSaya($usaha_id_1,$usaha_id_2,$deskripsi);
+    $result = UserController::requestKolab($usaha_id_1,$usaha_id_2,$deskripsi);
 
     echo json_encode($result);
 }

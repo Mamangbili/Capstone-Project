@@ -13,6 +13,8 @@ import { Profil_pribadi } from "./pages/profil_pribadi/Profil_pribadi";
 import Dashboard_tamu from "./pages/Dashboard_tamu";
 import Beranda_tamu from "./component/Beranda_tamu";
 import { Profil_toko_tamu } from "./pages/profil_toko/Profil_toko_tamu";
+import { Tambah_produk } from "./pages/profil_toko/Tambah_produk";
+import { Buat_invoices } from "./pages/invoices/Buat_invoices";
 
 
 // ))
@@ -27,16 +29,20 @@ export default function Utama() {
                     <Route path="beranda" element={<Beranda />} />
                     <Route path="mitra" element={<Mitra />} />
                     <Route path="invoices" element={<Invoices />} />
+                    <Route path="buatInvoices" element={<Buat_invoices />} />
                     <Route path="iklan" element={<Iklan />} />
-                    <Route path="toko/:usaha_id_2" element={<Profil_toko />} />
+                    <Route path='tambahProduk' element={<Tambah_produk />} />
+
+                    <Route path="toko/:usaha_id_2/" element={<Profil_toko />} >
+                    </Route>
+
                     <Route path="profil" element={<Profil_pribadi />} />
                     <Route path="edit" element={<Ubah_profil />} />
-                </Route>
+                </Route>        
 
                 <Route path="/dashboard-tamu" element={<Dashboard_tamu />} >
-                    <Route path='beranda' element= {<Beranda_tamu />} />
-                    <Route path='toko/:usaha_id' element= {<Profil_toko_tamu />} />
-
+                    <Route path='beranda' element={<Beranda_tamu />} />
+                    <Route path='toko/:usaha_id' element={<Profil_toko_tamu />} />
                 </Route>
             </Routes>
 

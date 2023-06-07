@@ -31,12 +31,13 @@ import Navbar_dashboard_tamu from "./component/Navbar_dashboard_tamu";
 import Dashboard_tamu from "./pages/Dashboard_tamu";
 import Beranda_tamu from "./component/Beranda_tamu";
 import { Buat_invoices } from "./pages/invoices/Buat_invoices";
-import { Tambah_produk_modal } from "./pages/invoices/invoices_components/Tambah_produk_modal";
+import { Tambah_produk } from "./pages/profil_toko/Tambah_produk";
+// import { Tambah_produk_modal } from "./pages/invoices/invoices_components/Tambah_produk_modal";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render (<React.StrictMode>
     <BrowserRouter>
-        <Utama/>
+        <Utama />
     </BrowserRouter>
 </React.StrictMode>);

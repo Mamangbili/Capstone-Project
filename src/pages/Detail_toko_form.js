@@ -92,7 +92,7 @@ const Detail_toko_form = () => {
             <div className="font-bold flex justify-center items-center  border-3 border-blue-700">
                 <div className="border-2 border-biru w-2/5 h-3/5 p-5 ">
                     <div className="flex justify-center mb-10">
-                        <h1 className=" text-2xl">FORM BIODATA USAHA belom selesai</h1>
+                        <h1 className=" text-2xl">FORM BIODATA USAHA</h1>
                     </div>
                     <table>
                         <tr>

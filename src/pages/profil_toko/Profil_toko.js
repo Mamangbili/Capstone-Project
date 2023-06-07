@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Pagination, Navigation,Thumbs } from "swiper";
+import { Pagination, Navigation, Thumbs } from "swiper";
 
 import { Button_maps } from "./profil_toko_components/Button_maps";
 import { Button_wa } from "./profil_toko_components/Button_wa";
@@ -19,9 +19,10 @@ import { Card_kolaborasi } from "./profil_toko_components/Card_kolaborasi";
 import data from './dummListKolab'
 import { useState } from "react";
 import { Modal_kolab } from "./profil_toko_components/Modal_kolab";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { Kolab_berhasil } from './profil_toko_components/Kolab_berhasil';
 
 
 export function Profil_toko() {
@@ -30,7 +31,8 @@ export function Profil_toko() {
     const [modal, setModal] = useState(false)
     const { usaha_id_2 } = useParams()
     const { usaha_id } = useParams()
-    const [thumbs, setThumbs]=useState()
+    const [thumbs, setThumbs] = useState()
+    const navigate = useNavigate()
 
     function closedFn() {
         setModal(false)
@@ -50,46 +52,63 @@ export function Profil_toko() {
 
         axios.post('http://localhost/proyekppl/api/kolabRequest.php', postData
         ).then(t => console.log(t))
+
+        tampilkanModalBerhasil()
     }
 
     useEffect(() => {
-        async function fetchData1() {
-            const response = await axios.get(`http://localhost/proyekppl/api/profilUsaha.php`, {
-                params: { usaha_id: usaha_id_2 },
-            }).then(response => {
-                setDataToko(response.data)})
-            
-            ;
-        }
-        fetchData1();
-
-
-
-        async function fetchData2() {
-            const response = await axios.get(`http://localhost/proyekppl/api/kolabList.php`, {
-                params: { usaha_id: usaha_id_2 },
-            }).then(response =>{
-                console.log(response.data)
-                setListKolab(response.data)
-            } )
-            
-        }
-        fetchData2();
-
+        axios.get(`http://localhost/proyekppl/api/profilUsaha.php`, {
+            params: { usaha_id: usaha_id_2 },
+        }).then(response => {
+            setDataToko(response.data)
+        })
+        axios.get(`http://localhost/proyekppl/api/kolabList.php`, {
+            params: { usaha_id: usaha_id_2 },
+        }).then(response => {
+            setListKolab(response.data)
+        })
     }, []);
 
-    function produk_focus (){
 
+    let viewButtonEdit2 = false
+    if (usaha_id === usaha_id_2) { viewButtonEdit2 = true }
+
+    const [viewButtonEdit, setViewButtonEdit] = useState(false)
+    const [modalEditToko, setModalEditToko] = useState(false)
+
+
+
+    //ganti pake navigasi aja
+    function routeTambahProduk() {
+        navigate(`/dashboard/${usaha_id}/tambahProduk`)
     }
-    
-    if (!DataToko ) return null 
+
+    const [ModalBerhasil, setModalBerahsil] = useState(false)
+
+    function tampilkanModalBerhasil() {
+        setModalBerahsil(true)
+    }
+
+    function tutupModalBerhasil() {
+        setModalBerahsil(false)
+    }
+
+
+
+    if (!DataToko) return null
 
     return (
         <>
             {modal ? <Modal_kolab onClosedFn={closedFn} onSetujuFn={setujuFN} /> : null}
+            {ModalBerhasil ? <Kolab_berhasil okFN={tutupModalBerhasil} /> : null}
             <div className="flex border w-5/6 m-auto ">
 
                 <div className='border border-red-200 w-1/3 '>
+
+
+                    {viewButtonEdit2 ? <button className='px-5 py-3 bg-slate-200 rounded-xl ml-20 shadow-md shadow-black'>Edit</button> : null}
+                    {viewButtonEdit2 ? <button onClick={routeTambahProduk} className='px-5 py-3 bg-slate-200 rounded-xl ml-5 shadow-md shadow-black my-2'>Tambah Produk</button> : null}
+
                     <Header_toko url_gambar_toko={DataToko?.url_gambar_profil} nama_usaha={DataToko.nama_usaha} jenis_usaha={DataToko.jenis_usaha} />
                     <Informasi_toko alamat_toko={DataToko.alamat} kota={DataToko.kota} provinsi={DataToko.provinsi} no_hp={DataToko.no_hp} />
                     <Deskripsi_toko deskripsi_toko={DataToko.deskripsi_usaha} />
@@ -106,9 +125,13 @@ export function Profil_toko() {
 
 
                     {/* button kolab */}
-                    <div className="flex w-full justify-center mt-4">
-                        <button className="bg-red-400 py-3 px-5 rounded-xl shadow-md shadow-slate-400" onClick={openFn}>Kolaborasi bersama {DataToko.nama_usaha}</button>
-                    </div>
+                    {usaha_id !== usaha_id_2 ? (
+                        <div className="flex w-full justify-center mt-4">
+                            <button className="bg-red-400 py-3 px-5 rounded-xl shadow-md shadow-slate-400" onClick={openFn}>
+                                Kolaborasi bersama {DataToko.nama_usaha}
+                            </button>
+                        </div>
+                    ) : null}
                 </div>
 
                 <div className='border w-2/3 border-blue-200 gap-y-4 flex flex-col'>
@@ -121,7 +144,7 @@ export function Profil_toko() {
 
                     {/* gambar toko */}
                     <div className="w-full h-52 bg-gray-100 flex justify-center">
-                        <img src={require('../../images/src/'+DataToko?.url_gambar_toko)} />
+                        <img src={require('../../images/src/' + DataToko?.url_gambar_toko)} />
                     </div>
 
 
@@ -146,9 +169,9 @@ export function Profil_toko() {
                                 </div>
                             </SwiperSlide>
 
-                            
 
-                            
+
+
                         </Swiper >
                     </div>
 

@@ -9,6 +9,7 @@ include_once __DIR__.'\Model\ProfilTokoModel.php';
 include_once __DIR__.'\Model\ProdukModel.php';
 include_once __DIR__.'\Model\KolaboratorModel.php';
 include_once __DIR__.'\Model\PermintaanKolabModel.php';
+include_once __DIR__.'\Model\InvoiceModel.php';
 
 class GuestController {
 
@@ -148,7 +149,48 @@ class UserController extends GuestController {
 
         return $result;
     }
+
+    public static function savedInvoice($usaha_id,$klien,$harga_total,$metode_bayar,$email_pembeli,$alamat_pembeli,$no_hp_pembeli, $list_produk ){
+        $modelInvoice = new InvoiceModel();
+        $invoice_id = $modelInvoice->addInvoice($usaha_id,$klien,$harga_total,$metode_bayar,$email_pembeli,$alamat_pembeli,$no_hp_pembeli);
+        
+    
+        foreach($list_produk as $each){
+            $modelInvoice->addPembelian($each['produk_id'],$invoice_id,$each['kuantitas']);
+        }
+
+        return true;
+
+    }
+
+    public static function tambahProduk($nama_produk, $harga, $url_gambar_produk, $deskripsi_produk, $usaha_id){
+        $produkModel = new ProdukModel();
+        $result = $produkModel->buatProduk($nama_produk, $harga, $url_gambar_produk, $deskripsi_produk, $usaha_id);
+        
+        return $result;
+    }
+
+    public static function ubahStatus($invoice_id){
+        $invoiceModel = new InvoiceModel();
+        $result = $invoiceModel->ubahStatus($invoice_id);
+        return $result;
+    }
+
+    public static function fetchInvoices($usaha_id){
+        $InvoiceModel = new InvoiceModel();
+        $result = $InvoiceModel->fetchMyInvoice($usaha_id);
+
+        return $result;
+    }
+
+    public static function hapusInvoice($invoice_id){
+        $invoiceModel = new InvoiceModel();
+        $result = $invoiceModel->hapusInvoice($invoice_id);
+
+        return $result;
+    }
 }
+
 
 
 
