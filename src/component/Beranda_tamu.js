@@ -6,10 +6,11 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import myimage from '../images/src/34-2023-06-03 055839-Screenshot (744).png'
 
 export default function Beranda_tamu() {
-    
+
     const [Data, setData] = useState([])
-    const [search,setSearch] = useState('')
+    const [search, setSearch] = useState('')
     const navigate = useNavigate()
+
 
     function navigateTo(usaha_id_baru) {
         navigate(`toko/${usaha_id_baru}`)
@@ -21,26 +22,47 @@ export default function Beranda_tamu() {
             {
                 params:
                 {
-                    limit: 6
+                    limit: 9,
                 }
             }
-        ).then(response => 
-            {console.log(response.data)
-            setData(response.data)})
+        ).then(response => {
+            console.log(response.data)
+            setData(response.data)
+        })
 
     }
+    useEffect(() => {
+        axios.get('http://localhost/proyekppl/api/cariUsaha.php', { params: { 'keyword': search, 'limit': 9 } })
+            .then(response => {
+                console.log(response.data)
+                setData(response.data)
+            })
+
+    }, [search])
 
     useEffect(() => {
         fetchData();
-    }, [search]);
 
-    function click() {
-        console.table(Data)
-    }
+
+    }, []);
+
     if (!Data) return null
-    // const toko = 'toko'+'/'
+
+    function onChangeCari(e) {
+        console.log(e.target.value)
+        setSearch(e.target.value)
+
+    }
+
+
+
     return (
         <>
+            <div>
+                <input type='text' placeholder='Cari' onChange={(e) => {
+                    onChangeCari(e)
+                }} className='text-sm border p-2 w-72 my-3' />
+            </div>
             <div className="min-h-full w-full  flex items-center justify-center p-2">
 
                 {/* <img src={myimage} alt="" /> */}

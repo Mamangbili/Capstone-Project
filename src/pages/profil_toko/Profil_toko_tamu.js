@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import { Pagination, Navigation,Thumbs } from "swiper";
+import { Pagination, Navigation, Thumbs } from "swiper";
 
 import { Button_maps } from "./profil_toko_components/Button_maps";
 import { Button_wa } from "./profil_toko_components/Button_wa";
@@ -30,46 +30,70 @@ export function Profil_toko_tamu() {
     const [ListKolab, setListKolab] = useState()
     const [modal, setModal] = useState(false)
     const { usaha_id } = useParams()
-    const [thumbs, setThumbs]=useState()
+    const [thumbs, setThumbs] = useState()
+    const [selectedProduk, setSelectedProduk] = useState()
+    const [produk, setProduk] = useState()
 
-    // console.log(usaha_id, 'id user')
 
     useEffect(() => {
 
-        
+
+
         async function fetchData1() {
+            axios.get('http://localhost/proyekppl/api/produkSaya.php', { params: { 'usaha_id': usaha_id } })
+                .then(response => {
+                    setProduk(response.data)
+                    setSelectedProduk({
+                        'nama_produk': response.data[0].nama_produk,
+                        'deskripsi_produk': response.data[0].deskripsi_produk,
+                        'url_gambar_produk': response.data[0].url_gambar_produk
+                    })
+                })
+
             const response = await axios.get(`http://localhost/proyekppl/api/profilUsaha.php`, {
                 params: { usaha_id: usaha_id },
             }).then(response => {
-                setDataToko(response.data)})
-            
-            ;
+                setDataToko(response.data)
+            })
+
+                ;
         }
         fetchData1();
 
         async function fetchData2() {
             const response = await axios.get(`http://localhost/proyekppl/api/kolabList.php`, {
                 params: { usaha_id: usaha_id },
-            }).then(response =>{
+            }).then(response => {
                 console.log(response.data)
                 setListKolab(response.data)
-            } )
-            
+            })
+
         }
         fetchData2();
-
 
 
     }, [usaha_id]);
 
 
-    
-    if (!DataToko && !ListKolab) {return null} 
+
+    if (!DataToko || !ListKolab) { return null }
 
     // const navigate = useNavigate()
 
-    function buttonList(){
+    function buttonList() {
         // navigate(0)
+    }
+    function onSelectProduk(nama_produk, deskripsi_produk, url_gambar_produk) {
+        setSelectedProduk(values => ({ ...values, 'nama_produk': nama_produk }))
+        setSelectedProduk(values => ({ ...values, 'deskripsi_produk': deskripsi_produk }))
+        setSelectedProduk(values => ({ ...values, 'url_gambar_produk': url_gambar_produk }))
+    }
+    function konversiUang(uang) {
+        return (uang).toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+        })
     }
 
     return (
@@ -86,7 +110,7 @@ export function Profil_toko_tamu() {
                     <div className="h-44 overflow-auto bg-slate-200">
                         {ListKolab?.map((each, i) => {
                             return (
-                                <Link to={'/dashboard-tamu/toko/'+each.usaha_id} onClick={buttonList}>
+                                <Link to={'/dashboard-tamu/toko/' + each.usaha_id} onClick={buttonList}>
                                     <Card_kolaborasi key={i} jenis_usaha={each.jenis_usaha} kota={each.kota} nama_usaha={each.nama_usaha} url_gambar_profil={each.url_gambar_profil} />
                                 </Link>
                             )
@@ -94,10 +118,10 @@ export function Profil_toko_tamu() {
                     </div>
 
 
-                    
+
                 </div>
 
-                <div className='border w-2/3 border-blue-200 gap-y-4 flex flex-col'>
+                <div className=' w-2/3 -blue-200 gap-y-4 flex flex-col ml-2'>
                     {/* button */}
                     <div className="flex w-full justify-center gap-x-10">
                         <Button_wa no_hp={DataToko.no_hp} />
@@ -107,15 +131,16 @@ export function Profil_toko_tamu() {
 
                     {/* gambar toko */}
                     <div className="w-full h-52 bg-gray-100 flex justify-center">
-                        <img src={require('../../images/src/'+DataToko?.url_gambar_toko)} />
+                        <img src={require('../../images/src/' + DataToko?.url_gambar_toko)} />
                     </div>
 
 
+                    <section className='text-xl text-center w-full font-bold border-t-2 border-b-2 border-black'>Produk</section>
                     {/* slide */}
-                    <div className=' h-96'>
+                    <div className='h-auto'>
                         <Swiper
                             slidesPerView={3}
-                            spaceBetween={0}
+                            spaceBetween={10}
                             loop={false}
                             pagination={{
                                 clickable: true,
@@ -123,24 +148,28 @@ export function Profil_toko_tamu() {
                             navigation={true}
                             modules={[Pagination, Navigation, Thumbs]}
                             onSwiper={setThumbs}
-                            className="mySwiper w-9/12"
+                            className="mySwiper w-10/12"
                         >
-                            <SwiperSlide>
-                                <div className='border-4 border-red-600 w-44 h-44'>
-                                    <img src="https://akcdn.detik.net.id/visual/2022/10/12/anime-spy-x-family_169.png?w=650"
-                                        className='inline-block w-full h-full object-contain' />
-                                </div>
-                            </SwiperSlide>
-
-                            
-
-                            
+                            {produk?.map((each) => {
+                                return (
+                                    <SwiperSlide>
+                                        <div className=' w-22 h-22 border-4 shadow bg-slate-100 shadow-black cursor-pointer p-2' onClick={() => onSelectProduk(each?.nama_produk, each?.deskripsi_produk, each?.url_gambar_produk)} >
+                                            <p className=''> {each.nama_produk}</p>
+                                            <div className='w-22 h-22'>
+                                                <img src={require('../../images/src/' + each.url_gambar_produk)}
+                                                    className='inline-block w-22 h-22 object-contain border' />
+                                            </div>
+                                            <p>{konversiUang(parseInt(each.harga))}</p>
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                            })}
                         </Swiper >
                     </div>
 
                     {/* detail produk */}
                     <div className="w-full">
-                        <Detail_produk nama_produk={DataToko.nama_produk} deskripsi_produk={DataToko.deskripsi_produk} url_gambar_produk={DataToko.url_gambar_produk} />
+                        <Detail_produk nama_produk={selectedProduk?.nama_produk} deskripsi_produk={selectedProduk?.deskripsi_produk} url_gambar_produk={selectedProduk?.url_gambar_produk} />
                     </div>
 
 
@@ -148,9 +177,12 @@ export function Profil_toko_tamu() {
                 </div>
 
 
-                {/* <button onClick={click}> fff</button> */}
+
 
             </div>
+
+
+
 
         </>)
 }

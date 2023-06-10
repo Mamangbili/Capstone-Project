@@ -8,11 +8,12 @@ export default function Card_dashboard({ url_gambar_toko, url_gambar_profil, nam
 
     const t1 = require("../../src/images/src/"+url_gambar_toko)
     const t2 = require("../../src/images/src/"+url_gambar_profil)
-    console.log(t1)
+    
+    if (!url_gambar_toko || !url_gambar_profil || !nama_usaha || !kota || !jenis_usaha || !deskripsi_toko) return null
 
     return (
         <>
-            <div className=" w-72 h-80 shadow-md rounded-xl shadow-black   flex flex-col">
+            <div className=" w-72 h-80 shadow-md rounded-xl shadow-black bg-gray-100   flex flex-col">
 
                 {/* gambar gede*/}
                 <div className="w-full h-[35%]  item-center  rouded-xl">
@@ -20,7 +21,7 @@ export default function Card_dashboard({ url_gambar_toko, url_gambar_profil, nam
                 </div>
 
                 {/* informasi */}
-                <div className="flex w-full items-center h-[20%]   p-2">
+                <div className="flex w-full items-center h-[20%] bg-  p-2">
                     {/* gambar */}
                     <div className="w-10 h-10">
                         <img src={t2} className="inline-block w-full h-full" />

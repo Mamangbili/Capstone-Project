@@ -12,7 +12,7 @@ const Dashboard_tamu = () => {
 
     useEffect(() => {
         axios.get('http://localhost/proyekppl/api/guestLogin.php',{params:{
-            limit:6
+            limit:9
         }})
         .then(response => {
             console.log(response.data)
@@ -23,9 +23,9 @@ const Dashboard_tamu = () => {
 
     return (
     <>
-        <div className="w-full h-full border-2 border-black">
+        <div className="w-full h-full bg-slate-200">
             <Navbar_dashboard_tamu />
-            <div className="flex flex-wrap gap-3  justify-center w-full min-h-screen m-auto">
+            <div className="flex flex-wrap gap-3  justify-center w-2/3 bg-white min-h-screen m-auto ">
                 <Outlet/>
             </div>
         </div>

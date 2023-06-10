@@ -52,16 +52,16 @@ export function Ubah_profil() {
     // }
 
     function submit() {
-        const inputForm = new FormData()
-        inputForm.append('nama', Data.nama,)
-        inputForm.append('user_id', Data.user_id,)
-        inputForm.append('email', Data.email,)
-        inputForm.append('no_hp', Data.no_hp)
-        inputForm.append('url_gambar_profil', img.url_gambar_profil)
-        inputForm.append('file_gambar_profil', img.file_gambar_profil)
+        // const inputForm = new FormData()
+        // inputForm.append('nama', Data.nama,)
+        // inputForm.append('user_id', Data.user_id,)
+        // inputForm.append('email', Data.email,)
+        // inputForm.append('no_hp', Data.no_hp)
+        // inputForm.append('url_gambar_profil', img.url_gambar_profil)
+        // inputForm.append('file_gambar_profil', img.file_gambar_profil)
 
-        axios.post('http://localhost/proyekppl/api/ubahProfil.php', inputForm, { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(response => console.log(response.data))
+        // axios.post('http://localhost/proyekppl/api/ubahProfil.php', inputForm, { headers: { 'Content-Type': 'multipart/form-data' } })
+        //     .then(response => console.log(response.data))
 
     }
 

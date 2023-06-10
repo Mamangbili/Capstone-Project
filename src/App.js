@@ -36,14 +36,16 @@ function App() {
             setRenderedComponent (<Nav_daftar_masuk/>);
         }
     };
-
+    // const logo_rope = require('./images/src/ROPE_LOGO.png')
     return (
     
     <div>
         <div className="w-5/6 m-auto">
             <div className="w-full  overflow-hidden rounded-xl m-auto flex mt-10 shadow-lg shadow-slate-800 ">
                 <div className="left-panel w-1/2 flex-1 h-auto bg-biru  p-6">
-                    <div className="border-2 w-14 h-14 rounded-full text-center item-center">logo</div>
+                    <div className="border-2 w-20 h-14 rounded-full text-center item-center">
+                        {/* <img src={logo_rope} className="w-full h-full inline-block object-fill bg-white rounded-xl p-2" /> */}
+                         </div>
                     <div className="intro ">
                         <div className="pr-32">
                             <h1 className="text-5xl pt-5 font-bold">
@@ -110,8 +112,8 @@ function App() {
                 <Card_hompage URLgambar={
                         require("./images/src/Microphone.png")
                     }
-                    judul="Otomasi Iklan"
-                    text="Raih cakupan pembelimu lebih luas dengan mengirim iklan ke banyak sosial media dalam sekali klik"/>
+                    judul="Perluas Jangkauan Bisnis"
+                    text="Raih cakupan pembelimu lebih luas dengan bekerjasama dengan kami "/>
             </div>
         </div>
     </div>

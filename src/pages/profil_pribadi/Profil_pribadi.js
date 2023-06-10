@@ -25,6 +25,8 @@ export function Profil_pribadi(){
 
 
     if (!Data)return null
+    
+
 
     return (
         <>

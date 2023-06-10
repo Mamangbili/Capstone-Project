@@ -5,7 +5,7 @@ export function Iklan() {
     return (
         <>
 
-            <div className="w-1/3 border gap-y-4 flex flex-col">
+            <div className="w-1/3 border gap-y-4 flex flex-col h-full p-5 rounded-md  bg-white">
                 <h1 className="font-bold text-xl">Ketentuan Iklan</h1>
 
                 <ul className="list-disc list-inside">

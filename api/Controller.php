@@ -13,6 +13,18 @@ include_once __DIR__.'\Model\InvoiceModel.php';
 
 class GuestController {
 
+    
+    public static function cariUsaha($keyword,$limit){
+        if (strlen($keyword)>0){
+        $CardTokoModels = new CardTokoModel();
+        $result = $CardTokoModels->searchUsaha($keyword);
+        }
+        else {
+        $result = self::guestFetch($limit);
+        }
+        
+        return $result;
+    }
     public static function  guestFetch($limit){
         $CardTokoModels = new CardTokoModel();
         $result = $CardTokoModels->fetchRandom($limit);
@@ -93,6 +105,52 @@ class GuestController {
 
 class UserController extends GuestController {
     
+    public static function ubahToko(
+        $nama_usaha
+        ,$alamat
+        ,$kota
+        ,$provinsi
+        ,$deskripsi_toko
+        ,$url_gambar_toko
+        ,$usaha_id
+    )   
+    {
+        $modelProfil = new ProfilTokoModel();
+        $modelProfil->ubahToko(
+            $usaha_id
+            ,$nama_usaha
+            ,$alamat
+            ,$kota
+            ,$provinsi
+            ,$deskripsi_toko
+            ,$url_gambar_toko
+        );
+
+        return true;
+    }
+
+    public static function ubahToko2(
+        $nama_usaha
+        ,$alamat
+        ,$kota
+        ,$provinsi
+        ,$deskripsi_toko
+        ,$usaha_id
+    )   
+    {
+        $modelProfil = new ProfilTokoModel();
+        $modelProfil->ubahTokoNoImage(
+            $usaha_id
+            ,$nama_usaha
+            ,$alamat
+            ,$kota
+            ,$provinsi
+            ,$deskripsi_toko
+        );
+
+        return true;
+    }
+
     public static function requestKolab($usaha_id_1,$usaha_id_2,$deskripsi_permintaan){
         $modelKolabrequest = new PermintaanKolabModel(); 
         $result = $modelKolabrequest->buatPermintaan($usaha_id_1,$usaha_id_2,$deskripsi_permintaan);

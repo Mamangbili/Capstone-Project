@@ -7,7 +7,7 @@ export function Tambah_produk_modal({ usaha_id, batalFN, tambahFN }) {
     const [selectedProduk, setSelectedProduk] = useState({})
                                                                     //NANTI GANTI!!!! jadi usaha id
     useEffect(() => {
-        axios.get('http://localhost/proyekppl/api/produkSaya.php', { params: { 'usaha_id': 19 } })
+        axios.get('http://localhost/proyekppl/api/produkSaya.php', { params: { 'usaha_id': usaha_id } })
             .then(response => setData(response.data))
     }, [selectedProduk])
 
@@ -36,6 +36,8 @@ export function Tambah_produk_modal({ usaha_id, batalFN, tambahFN }) {
         })
 
     }
+
+    
 
     if (!Data) return null
 

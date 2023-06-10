@@ -8,7 +8,7 @@ const Dashboard = () => {
     const {usaha_id} =useParams()
     return (
     <>
-        <div className="w-full h-full border-2 q">
+        <div className="w-full h-full border-2 bg-gray-200">
             <Navbar_dashboard usaha_id={usaha_id}/>
             <div className="flex flex-wrap gap-3  justify-center w-full min-h-screen m-auto">
                 <Outlet/>

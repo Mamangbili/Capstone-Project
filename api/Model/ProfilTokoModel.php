@@ -75,5 +75,47 @@ class ProfilTokoModel
 
         return ['usaha_id' => $lastInsertedId, 'user_id' => $user_id];
     }
+
+    public function ubahToko(
+        $usaha_id
+        ,$nama_usaha
+        ,$alamat
+        ,$kota
+        ,$provinsi
+        ,$deskripsi_toko
+        ,$url_gambar_toko
+    )
+    {
+        $query = "
+        UPDATE `usaha` SET `nama_usaha`='$nama_usaha',`alamat`='$alamat',`kota`='$kota',`provinsi`='$provinsi',`deskripsi_usaha`='$deskripsi_toko',`url_gambar_toko`='$url_gambar_toko' WHERE `usaha_id`=$usaha_id
+        ";
+
+        $myDB = new MyDB();
+        $myDB->getConnection();
+        $result = $myDB->execute($query);
+
+        return $result;
+    }
+
+    public function ubahTokoNoImage(
+        $usaha_id
+        ,$nama_usaha
+        ,$alamat
+        ,$kota
+        ,$provinsi
+        ,$deskripsi_toko
+    )
+    {
+        $query = "
+        UPDATE `usaha` SET `nama_usaha`='$nama_usaha',`alamat`='$alamat',`kota`='$kota',`provinsi`='$provinsi',`deskripsi_usaha`='$deskripsi_toko', WHERE `usaha_id`=$usaha_id
+        ";
+
+        $myDB = new MyDB();
+        $myDB->getConnection();
+        $result = $myDB->execute($query);
+
+        return $result;
+    }
 }
+
 

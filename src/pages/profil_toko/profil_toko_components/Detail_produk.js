@@ -2,11 +2,12 @@ import myimage from '../../../images/src/channel.png'
 
 
 export function Detail_produk({ nama_produk, deskripsi_produk, url_gambar_produk }) {
-
+    if (!url_gambar_produk) return null
+    url_gambar_produk = require('../../../images/src/'+url_gambar_produk)
     return (
         <>
 
-            <div className="p-5 h-full w-full border flex bg-slate-200 rounded-md">
+            <div className="p-5 h-full w-full border flex bg-slate-200 rounded-md border-black">
                 {/* gambar */}
                 <div className="flex flex-col  w-1/3 font-bold">
                     <h3 className='text-center mb-3 text-sm'> {nama_produk}</h3>

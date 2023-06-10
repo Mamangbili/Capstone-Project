@@ -17,3 +17,10 @@ console.log(Input.penagih)
             // postForm.append('list_produk', ListProduk)
 
             // axios.post( , post)
+
+        
+function onSelectProduk(nama_produk,deskripsi_produk,url_gambar_produk){
+        setSelectedProduk(values=> ({...values, 'nama_produk':nama_produk}))
+        setSelectedProduk(values=> ({...values, 'deskripsi_produk':deskripsi_produk}))
+        setSelectedProduk(values=> ({...values, 'url_gambar_produk':url_gambar_produk}))
+    }

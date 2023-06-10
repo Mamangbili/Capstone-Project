@@ -33,6 +33,8 @@ export function Profil_toko() {
     const { usaha_id } = useParams()
     const [thumbs, setThumbs] = useState()
     const navigate = useNavigate()
+    const [produk, setProduk] = useState([])
+    const [selectedProduk, setSelectedProduk] = useState()
 
     function closedFn() {
         setModal(false)
@@ -67,6 +69,18 @@ export function Profil_toko() {
         }).then(response => {
             setListKolab(response.data)
         })
+
+        axios.get('http://localhost/proyekppl/api/produkSaya.php', { params: { 'usaha_id': usaha_id_2 } })
+            .then(response => {
+                console.log(response.data[0].url_gambar_produk)
+                setProduk(response.data)
+                setSelectedProduk({
+                    'nama_produk': response.data[0].nama_produk,
+                    'deskripsi_produk': response.data[0].deskripsi_produk,
+                    'url_gambar_produk': response.data[0].url_gambar_produk
+                })
+            })
+
     }, []);
 
 
@@ -79,7 +93,7 @@ export function Profil_toko() {
 
 
     //ganti pake navigasi aja
-    function routeTambahProduk() {
+    function to_TambahToko() {
         navigate(`/dashboard/${usaha_id}/tambahProduk`)
     }
 
@@ -93,21 +107,43 @@ export function Profil_toko() {
         setModalBerahsil(false)
     }
 
-
+    function to_EditToko() {
+        navigate(`/dashboard/${usaha_id}/editToko`)
+    }
 
     if (!DataToko) return null
+
+    function pindah_toko(tokobaru) {
+        navigate('/dashboard/' + usaha_id + '/toko/' + tokobaru)
+        window.location.reload()
+    }
+
+    function konversiUang(uang) {
+        return (uang).toLocaleString('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0,
+        })
+    }
+
+
+    function onSelectProduk(nama_produk, deskripsi_produk, url_gambar_produk) {
+        setSelectedProduk(values => ({ ...values, 'nama_produk': nama_produk }))
+        setSelectedProduk(values => ({ ...values, 'deskripsi_produk': deskripsi_produk }))
+        setSelectedProduk(values => ({ ...values, 'url_gambar_produk': url_gambar_produk }))
+    }
 
     return (
         <>
             {modal ? <Modal_kolab onClosedFn={closedFn} onSetujuFn={setujuFN} /> : null}
             {ModalBerhasil ? <Kolab_berhasil okFN={tutupModalBerhasil} /> : null}
-            <div className="flex border w-5/6 m-auto ">
+            <div className="flex  w-5/6 m-auto bg-white p-3 ">
 
-                <div className='border border-red-200 w-1/3 '>
+                <div className='  w-1/3 '>
 
 
-                    {viewButtonEdit2 ? <button className='px-5 py-3 bg-slate-200 rounded-xl ml-20 shadow-md shadow-black'>Edit</button> : null}
-                    {viewButtonEdit2 ? <button onClick={routeTambahProduk} className='px-5 py-3 bg-slate-200 rounded-xl ml-5 shadow-md shadow-black my-2'>Tambah Produk</button> : null}
+                    {viewButtonEdit2 ? <button onClick={to_EditToko} className='px-5 py-3 bg-slate-200 rounded-xl ml-20 shadow-md shadow-black'>Edit</button> : null}
+                    {viewButtonEdit2 ? <button onClick={to_TambahToko} className='px-5 py-3 bg-slate-200 rounded-xl ml-5 shadow-md shadow-black my-2'>Tambah Produk</button> : null}
 
                     <Header_toko url_gambar_toko={DataToko?.url_gambar_profil} nama_usaha={DataToko.nama_usaha} jenis_usaha={DataToko.jenis_usaha} />
                     <Informasi_toko alamat_toko={DataToko.alamat} kota={DataToko.kota} provinsi={DataToko.provinsi} no_hp={DataToko.no_hp} />
@@ -118,7 +154,9 @@ export function Profil_toko() {
                     <div className="h-44 overflow-auto bg-slate-200">
                         {ListKolab?.map((each, i) => {
                             return (
-                                <Card_kolaborasi key={i} jenis_usaha={each.jenis_usaha} kota={each.kota} nama_usaha={each.nama_usaha} url_gambar_profil={each.url_gambar_profil} />
+                                <div className='cursor-pointer' onClick={() => pindah_toko(each.usaha_id)}>
+                                    <Card_kolaborasi key={i} jenis_usaha={each.jenis_usaha} kota={each.kota} nama_usaha={each.nama_usaha} url_gambar_profil={each.url_gambar_profil} />
+                                </div>
                             )
                         })}
                     </div>
@@ -134,7 +172,7 @@ export function Profil_toko() {
                     ) : null}
                 </div>
 
-                <div className='border w-2/3 border-blue-200 gap-y-4 flex flex-col'>
+                <div className=' w-2/3 -blue-200 gap-y-4 flex flex-col ml-2'>
                     {/* button */}
                     <div className="flex w-full justify-center gap-x-10">
                         <Button_wa no_hp={DataToko.no_hp} />
@@ -147,12 +185,13 @@ export function Profil_toko() {
                         <img src={require('../../images/src/' + DataToko?.url_gambar_toko)} />
                     </div>
 
-
+                    
+                    <section className='text-xl text-center w-full font-bold border-t-2 border-b-2 border-black'>Produk</section>
                     {/* slide */}
-                    <div className=' h-96'>
+                    <div className='h-auto'>
                         <Swiper
                             slidesPerView={3}
-                            spaceBetween={0}
+                            spaceBetween={10}
                             loop={false}
                             pagination={{
                                 clickable: true,
@@ -160,24 +199,28 @@ export function Profil_toko() {
                             navigation={true}
                             modules={[Pagination, Navigation, Thumbs]}
                             onSwiper={setThumbs}
-                            className="mySwiper w-9/12"
+                            className="mySwiper w-10/12"
                         >
-                            <SwiperSlide>
-                                <div className='border-4 border-red-600 w-44 h-44'>
-                                    <img src="https://akcdn.detik.net.id/visual/2022/10/12/anime-spy-x-family_169.png?w=650"
-                                        className='inline-block w-full h-full object-contain' />
-                                </div>
-                            </SwiperSlide>
-
-
-
-
+                            {produk?.map((each) => {
+                                return (
+                                    <SwiperSlide>
+                                        <div className=' w-22 h-22 border-4 shadow bg-slate-100 shadow-black cursor-pointer p-2' onClick={()=>onSelectProduk(each?.nama_produk,each?.deskripsi_produk,each?.url_gambar_produk)} >
+                                            <p className=''> {each.nama_produk}</p>
+                                            <div className='h-22 w-22'>
+                                                <img src={require('../../images/src/' + each.url_gambar_produk)}
+                                                    className='inline-block w-full object-contain border h-full' />
+                                            </div>
+                                            <p>{konversiUang(parseInt(each.harga))}</p>
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                            })}
                         </Swiper >
                     </div>
 
                     {/* detail produk */}
                     <div className="w-full">
-                        <Detail_produk nama_produk={DataToko.nama_produk} deskripsi_produk={DataToko.deskripsi_produk} url_gambar_produk={DataToko.url_gambar_produk} />
+                        <Detail_produk nama_produk={selectedProduk?.nama_produk} deskripsi_produk={selectedProduk?.deskripsi_produk} url_gambar_produk={selectedProduk?.url_gambar_produk} />
                     </div>
 
 

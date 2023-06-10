@@ -120,7 +120,7 @@ export function Mitra() {
             {/* container inti di parent */}
 
             {modalKolab ? <Modal_konfirmasi_hapus batalFN={batalFN} hapusFN={hapusFN} /> : null}
-            <div className=" flex gap-x-10 justify-evenly " >
+            <div className=" flex gap-x-10 justify-evenly bg-white p-5" >
                 <div>
                     <h1 className="font-bold text-2xl">Kolaborator Saat Anda Ini</h1>
                     {/* container card mitra */}

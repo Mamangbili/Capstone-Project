@@ -26,3 +26,4 @@ class MyDB
         return $result;
     }
 }
+

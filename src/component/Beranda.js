@@ -9,7 +9,7 @@ export default function Beranda() {
 
     let { usaha_id } = useParams()
     const [Data, setData] = useState([])
-
+    const [search, setSearch] = useState('')
     const navigate = useNavigate()
 
     function navigateTo(usaha_id_baru) {
@@ -23,14 +23,24 @@ export default function Beranda() {
                 params:
                 {
                     usaha_id: usaha_id,
-                    limit: 6
+                    limit: 9
                 }
             }
-        ).then(response => 
-            {console.log(response.data)
-            setData(response.data)})
+        ).then(response => {
+            console.log(response.data)
+            setData(response.data)
+        })
 
     }
+
+    useEffect(() => {
+        axios.get('http://localhost/proyekppl/api/cariUsaha.php', { params: { 'keyword': search, 'limit': 9 } })
+            .then(response => {
+                console.log(response.data)
+                setData(response.data)
+            })
+
+    }, [search])
 
     useEffect(() => {
         fetchData();
@@ -40,13 +50,23 @@ export default function Beranda() {
         console.table(Data)
     }
     if (!Data) return null
-    // const toko = 'toko'+'/'
+
+    function onChangeCari(e) {
+        console.log(e.target.value)
+        setSearch(e.target.value)
+
+    }
     return (
         <>
-            <div className="min-h-full w-full  flex items-center justify-center p-2">
+            <div>
+                <input type='text' placeholder='Cari' onChange={(e) => {
+                    onChangeCari(e)
+                }} className='text-sm border p-2 w-72 my-3' />
+            </div>
+            <div className=" w-full  flex items-center  border justify-center p-2">
 
                 {/* <img src={myimage} alt="" /> */}
-                <div className="overflow-auto flex flex-wrap justify-around w-[80vw]  gap-4 p-2">
+                <div className="overflow-auto flex flex-wrap justify-around w-[80vw] bg-white  gap-4 p-2">
                     {Data?.map((each) => (
                         <Link to={`/dashboard/${usaha_id}/toko/${each.usaha_id}`}>
                             <Card_dashboard

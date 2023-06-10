@@ -89,30 +89,27 @@ export function Invoices() {
     return (
         <>
             {/* div  semenetara nanti hapus*/}
-            <div className="flex">
-                {modal ? <Modal_konfirmasi_hapus batalFN={batalFN} hapusFN={hapusFN} /> : null}
-                <div className="border ">
-                    {ViewsInvoices?.map(each =>
-                        <div>
-                            <Card_invoice
-                                key={each.invoice_id}
-                                invoice_id={each.invoice_id}
-                                klien={each.klien}
-                                status_bayar={each.status_bayar}
-                                tgl_invoice={each.tgl_invoice}
-                                tampilkanModalHapusFN={tampilkanModalKonfirmasi}
-                            />
-                        </div>
-                    )
-                    }
-
-                </div>
-
-
-                <Link to={`/dashboard/${usaha_id}/buatInvoices`}>
-                    <button className="bg-gray-300 px-5 py-2 h-14 rounded-xl shadow-sm flex items-center shadow-slate-300 " >Buat Invoice</button></Link>
+            {modal ? <Modal_konfirmasi_hapus batalFN={batalFN} hapusFN={hapusFN} /> : null}
+            <div className="border bg-white p-4">
+                {ViewsInvoices?.map(each =>
+                    <div>
+                        <Card_invoice
+                            key={each.invoice_id}
+                            invoice_id={each.invoice_id}
+                            klien={each.klien}
+                            status_bayar={each.status_bayar}
+                            tgl_invoice={each.tgl_invoice}
+                            tampilkanModalHapusFN={tampilkanModalKonfirmasi}
+                        />
+                    </div>
+                )
+                }
 
             </div>
+
+
+            <Link to={`/dashboard/${usaha_id}/buatInvoices`}>
+                <button className="bg-sky-200 px- mt-44 fixed 5 py-2 px-5 h-14 rounded-xl shadow-sm flex items-center shadow-slate-300 " >Buat Invoice</button></Link>
 
         </>
 
