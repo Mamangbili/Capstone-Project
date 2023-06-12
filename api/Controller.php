@@ -142,6 +142,14 @@ class AdminController{
 
 
 class UserController extends GuestController {
+    public static function invoiceDetail($invoice_id){
+        $model = new InvoiceModel();
+        $result = $model->fetchDetailInvoice($invoice_id);
+        
+        return $result;
+    }
+
+
     public static function tambahIklan($usaha_id,$url_gambar_iklan, $url_gambar_bukti){
         $iklanModel = new IklanModel();
         $result = $iklanModel->savedIklan($usaha_id,$url_gambar_iklan,$url_gambar_bukti);

@@ -36,12 +36,13 @@ import { Card_tayang } from "./pages/dashboard_admin/component/Card_tayang";
 import { Modal_preview_iklan } from "./pages/dashboard_admin/component/Modal_preview_iklan";
 import { Dashboard_admin } from "./pages/dashboard_admin/Dashborad_admin";
 import { Modal_hapus } from "./pages/dashboard_admin/component/Modal_hapus";
+import { Invoice_detail } from "./pages/invoices/Invoice_detail";
 // import { Tambah_produk_modal } from "./pages/invoices/invoices_components/Tambah_produk_modal";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render (<React.StrictMode>
     <BrowserRouter>
-        <Utama />
+        <Invoice_detail />
     </BrowserRouter>
 </React.StrictMode>);
