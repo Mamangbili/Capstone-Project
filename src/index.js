@@ -43,6 +43,6 @@ import { Invoice_detail } from "./pages/invoices/Invoice_detail";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render (<React.StrictMode>
     <BrowserRouter>
-        <Invoice_detail />
+        <Utama />
     </BrowserRouter>
 </React.StrictMode>);

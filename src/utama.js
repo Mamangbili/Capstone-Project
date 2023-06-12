@@ -17,6 +17,7 @@ import { Tambah_produk } from "./pages/profil_toko/Tambah_produk";
 import { Buat_invoices } from "./pages/invoices/Buat_invoices";
 import { Edit_toko } from "./pages/profil_toko/Edit_toko";
 import { Dashboard_admin } from "./pages/dashboard_admin/Dashborad_admin";
+import { Invoice_detail } from "./pages/invoices/Invoice_detail";
 
 
 // ))
@@ -36,8 +37,9 @@ export default function Utama() {
                     <Route path="iklan" element={<Iklan />} />
                     <Route path='tambahProduk' element={<Tambah_produk />} />
 
-                    <Route path="toko/:usaha_id_2" element={<Profil_toko />} >
-                    </Route>
+                    <Route path="toko/:usaha_id_2" element={<Profil_toko />} />
+                    <Route path="invoiceDetail/:invoice_id" element={<Invoice_detail />} />
+                    
 
                     <Route path="profil" element={<Profil_pribadi />} />
                     <Route path="edit" element={<Ubah_profil />} />

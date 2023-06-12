@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 
 export function Card_invoice({ tgl_invoice, invoice_id, klien, status_bayar, tampilkanModalHapusFN }) {
     const logo_pdf = 'https://cdn-icons-png.flaticon.com/512/5376/5376490.png'
@@ -9,6 +10,7 @@ export function Card_invoice({ tgl_invoice, invoice_id, klien, status_bayar, tam
 
     const warna = ['bg-red-300', 'bg-lime-300']
     const tulisan = ['Belum lunas', 'Lunas']
+    const {usaha_id} = useParams()
 
     const [btnCss, setBtncss] = useState()
 
@@ -45,9 +47,11 @@ export function Card_invoice({ tgl_invoice, invoice_id, klien, status_bayar, tam
         <>
             <div className="border flex-grow-0 flex bg-sky-300 gap-x-2 w-6/6 py-3 px-2">
                 {/* button pdf */}
-                <button>
-                    <div className="w-9 h-9 flex items-center "><img src={logo_pdf} className="w-full h-full inline-block" /></div>
-                </button>
+                <Link to={'/dashboard/'+usaha_id+'/invoiceDetail/'+invoice_id}>
+                    <button>
+                        <div className="w-9 h-9 flex items-center "><img src={logo_pdf} className="w-full h-full inline-block" /></div>
+                    </button>
+                </Link>
 
                 {/* button delete */}
                 <button onClick={() => tampilkanModalHapusFN(invoice_id)}>
