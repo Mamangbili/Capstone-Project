@@ -32,6 +32,10 @@ import Dashboard_tamu from "./pages/Dashboard_tamu";
 import Beranda_tamu from "./component/Beranda_tamu";
 import { Buat_invoices } from "./pages/invoices/Buat_invoices";
 import { Tambah_produk } from "./pages/profil_toko/Tambah_produk";
+import { Card_tayang } from "./pages/dashboard_admin/component/Card_tayang";
+import { Modal_preview_iklan } from "./pages/dashboard_admin/component/Modal_preview_iklan";
+import { Dashboard_admin } from "./pages/dashboard_admin/Dashborad_admin";
+import { Modal_hapus } from "./pages/dashboard_admin/component/Modal_hapus";
 // import { Tambah_produk_modal } from "./pages/invoices/invoices_components/Tambah_produk_modal";
 
 

@@ -10,6 +10,7 @@ include_once __DIR__.'\Model\ProdukModel.php';
 include_once __DIR__.'\Model\KolaboratorModel.php';
 include_once __DIR__.'\Model\PermintaanKolabModel.php';
 include_once __DIR__.'\Model\InvoiceModel.php';
+include_once __DIR__.'\Model\IklanModel.php';
 
 class GuestController {
 
@@ -102,8 +103,53 @@ class GuestController {
     }
 }
 
+class AdminController{
+    public static function terimaIklan($iklan_id){
+        $iklanModel = new IklanModel();
+        $result = $iklanModel->terimaIklan($iklan_id);
+        
+        return $result;
+        
+    }
+    
+    
+    
+    public static function hapusIklan($iklan_id){
+        $iklanModel = new IklanModel();
+        $result = $iklanModel->hapusIklan($iklan_id);
+        
+        return $result;
+    }
+    
+    public static function fetchPermintaanIklan(){
+        $iklanModel = new IklanModel();
+        $result = $iklanModel->fetchPermintaanIklan();
+        
+        return $result;
+        
+        
+    }
+    
+    public static function fetchIklanTayang(){
+        $iklanModel = new IklanModel();
+        $result = $iklanModel->fetchIklanTayang();
+        
+        return $result;
+    }
+
+
+}
+
 
 class UserController extends GuestController {
+    public static function tambahIklan($usaha_id,$url_gambar_iklan, $url_gambar_bukti){
+        $iklanModel = new IklanModel();
+        $result = $iklanModel->savedIklan($usaha_id,$url_gambar_iklan,$url_gambar_bukti);
+        
+        return $result;
+        
+    }
+    
     
     public static function ubahToko(
         $nama_usaha

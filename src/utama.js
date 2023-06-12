@@ -16,6 +16,7 @@ import { Profil_toko_tamu } from "./pages/profil_toko/Profil_toko_tamu";
 import { Tambah_produk } from "./pages/profil_toko/Tambah_produk";
 import { Buat_invoices } from "./pages/invoices/Buat_invoices";
 import { Edit_toko } from "./pages/profil_toko/Edit_toko";
+import { Dashboard_admin } from "./pages/dashboard_admin/Dashborad_admin";
 
 
 // ))
@@ -26,6 +27,7 @@ export default function Utama() {
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/detailTokoForm/:user_id" element={<Detail_toko_form />} />
+                <Route path='/dashboard/admin' element={<Dashboard_admin />}/>
                 <Route path="/dashboard/:usaha_id" element={<Dashboard />}>
                     <Route path="beranda" element={<Beranda />} />
                     <Route path="mitra" element={<Mitra />} />

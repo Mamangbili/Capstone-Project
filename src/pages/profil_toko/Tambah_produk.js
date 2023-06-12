@@ -38,7 +38,7 @@ export function Tambah_produk() {
 
             reader.onload = (event) => {
                 setImagePreview(event.target.result);
-            };
+            };  
 
             reader.readAsDataURL(selectedFile);
         }

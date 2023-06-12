@@ -18,6 +18,7 @@ const Form_masuk = () => {
 
         setInputLogin(values => ({ ...values, [name]: value }))
     }
+  
 
     const handleSubmit = function (event) {
         setLoginClick(true)
@@ -26,6 +27,7 @@ const Form_masuk = () => {
             header: { 'Content-Type': 'application/json', }
         })
             .then(response => {
+                console.log(response.data.tipe_user)
                 if (response.data['validation'] === false ) {setValid(false)}
                 toDashboard(response)
             })
@@ -35,7 +37,13 @@ const Form_masuk = () => {
 
 
     const toDashboard = (response) => {
-        if (response.data['validation']) {
+        if (response.data.tipe_user==='1'){
+            console.log('wakwaw')
+            navigate('/dashboard/admin')
+            return
+        }
+    
+        if (response.data.tipe_user==='2') {
             navigate(`/dashboard/${response.data['usaha_id']}/beranda`);
         }
         
