@@ -65,11 +65,11 @@ export default function Beranda() {
         fetchData();
     }, [usaha_id]);
 
+    console.log(Data.url_gambar_toko)
     function click() {
         console.table(Data)
     }
-    if (!Data) return null
-
+    if (!Data ) return null
     function onChangeCari(e) {
         console.log(e.target.value)
         setSearch(e.target.value)

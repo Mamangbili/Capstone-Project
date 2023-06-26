@@ -31,7 +31,7 @@ class CardTokoModel
             inner join users on usaha.user_id = users.user_id
             inner join produk on usaha.usaha_id = produk.usaha_id
 
-            where usaha.usaha_id <> {$usaha_id}
+            where usaha.usaha_id <> {$usaha_id} and usaha.usaha_id <> 35
             ORDER BY field(usaha.kota, '{$kota}') DESC, field(usaha.provinsi, '{$provinsi}') DESC
             LIMIT {$limit}";
         } else {
@@ -46,11 +46,12 @@ class CardTokoModel
             usaha.usaha_id,
             produk.produk_id,
             users.user_id
-
+            
             from usaha
             inner join users on usaha.user_id = users.user_id
             inner join produk on usaha.usaha_id = produk.usaha_id
 
+            where usaha.usaha_id <> 35
             ORDER BY field(usaha.kota, '{$kota}') DESC, field(usaha.provinsi, '{$provinsi}') DESC
             LIMIT {$limit}";
         }

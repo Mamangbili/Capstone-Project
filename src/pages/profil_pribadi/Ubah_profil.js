@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export function Ubah_profil() {
     const { usaha_id } = useParams()
     const [Data, setData] = useState()
     const [Input, setInput] = useState({
-
     })
+    const navigate = useNavigate()
+    
     useEffect(() => {
         axios.get('http://localhost/proyekppl/api/profilUsaha.php', { params: { 'usaha_id': usaha_id } })
             .then(response => {
@@ -44,13 +45,13 @@ export function Ubah_profil() {
         }
     }
 
-    if (!Data) return null
+    if (!Data || !Data.url_gambar_profil) return null
     let img_url = require('../../images/src/' + Data?.url_gambar_profil)
 
     // function ubahGambar (){
 
     // }
-
+    
     function submit() {
         const inputForm = new FormData()
         inputForm.append('nama', Data.nama,)
@@ -62,6 +63,8 @@ export function Ubah_profil() {
 
         axios.post('http://localhost/proyekppl/api/ubahProfil.php', inputForm, { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => console.log(response.data))
+        
+        navigate('/dashboard/'+usaha_id+'/profil')
 
     }
 

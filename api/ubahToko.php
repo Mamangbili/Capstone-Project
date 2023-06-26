@@ -17,13 +17,16 @@ $deskripsi_toko = $_POST['deskripsi_usaha'];
 $usaha_id = $_POST['usaha_id'];
 
 $url_gambar_toko = $_POST['url_gambar_toko'];
-$files_gambar_toko =isset ($_POST['files_gambar_toko']);
+$file_gambar_toko =$_FILES['files_gambar_toko'];
 
 
-if ($files_gambar_toko !== null){
+var_dump($file_gambar_toko);
+if ($file_gambar_toko !== null){
     $currentDir = getcwd();
     $parentDir = dirname($currentDir);
     $destinationPath = $parentDir . '\\src\\images\\src\\';
+    move_uploaded_file($file_gambar_toko['tmp_name'], $destinationPath.$url_gambar_toko);
+    
     $result = UserController::ubahToko(
         $nama_usaha
         ,$alamat
@@ -35,7 +38,6 @@ if ($files_gambar_toko !== null){
     );
     if ($result) {
 
-        move_uploaded_file($file_gambar_toko['tmp_name'], $destinationPath.$url_gambar_toko);
     }
     
     echo $result;

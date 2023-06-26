@@ -112,6 +112,7 @@ export function Profil_toko() {
     }
 
     if (!DataToko) return null
+    if(!DataToko.url_gambar_toko) return  null
 
     function pindah_toko(tokobaru) {
         navigate('/dashboard/' + usaha_id + '/toko/' + tokobaru)

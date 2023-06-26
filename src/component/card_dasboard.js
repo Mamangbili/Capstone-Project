@@ -6,10 +6,13 @@ import myimage from '../images/src/34-2023-06-03 055839-Screenshot (744).png'
 export default function Card_dashboard({ url_gambar_toko, url_gambar_profil, nama_usaha, kota, jenis_usaha, deskripsi_toko }) {
     const logo_pin = 'https://cdn-icons-png.flaticon.com/512/72/72617.png'
 
+    // if (!url_gambar_toko && !url_gambar_profil && !nama_usaha && !kota && !jenis_usaha && !deskripsi_toko) return null
+    
+    if (!url_gambar_profil === undefined) return null
     const t1 = require("../../src/images/src/"+url_gambar_toko)
     const t2 = require("../../src/images/src/"+url_gambar_profil)
     
-    if (!url_gambar_toko || !url_gambar_profil || !nama_usaha || !kota || !jenis_usaha || !deskripsi_toko) return null
+    
 
     return (
         <>

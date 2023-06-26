@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 export function Edit_toko() {
@@ -15,6 +15,7 @@ export function Edit_toko() {
         url_gambar_toko: "",
         files_gambar_toko: null
     });
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -24,7 +25,7 @@ export function Edit_toko() {
             })
             .then(response => {
                 setGambar({
-                    url_gambar_toko: response.data.url_gambar_toko,
+                    url_gambar_toko: require('../../images/src/'+response.data.url_gambar_toko),
                     files_gambar_toko: null
                 });
                 setInputForm({ ...InputForm, ...response.data });
@@ -56,10 +57,11 @@ export function Edit_toko() {
         } else {
             setInputForm({ ...InputForm, [name]: value });
         }
+        
+        
     }
 
     function onSubmit() {
-        console.log(Gambar.files_gambar_toko);
 
         const postForm = new FormData()
         postForm.append('nama_usaha', InputForm.nama_usaha)
@@ -68,11 +70,14 @@ export function Edit_toko() {
         postForm.append('kota', InputForm.kota)
         postForm.append('provinsi', InputForm.provinsi)
         postForm.append('deskripsi_usaha', InputForm.deskripsi_usaha)
-        postForm.append('url_gambar_toko', Gambar.url_gambar_toko)
+        postForm.append('url_gambar_toko', InputForm.url_gambar_toko)
         postForm.append('files_gambar_toko', Gambar.files_gambar_toko)
 
         axios.post('http://localhost/proyekppl/api/ubahToko.php'
         , postForm , {headers: {'Content-Type':'multipart/form-data'}}).then(response => console.log(response))
+        
+        navigate('/dashboard/'+usaha_id+'/toko/'+usaha_id)
+        
     }
 
     return (
